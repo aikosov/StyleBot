@@ -114,7 +114,7 @@ async def handle_style(callback: types.CallbackQuery):
     await callback.answer()
 
 # Обработка выбора формата и генерация изображения
-@dp.callback_query(F.data.startwith("format_"))
+@dp.callback_query(F.data.startswith("format_"))
 async def handle_format(callback: types.CallbackQuery):
     user_id = callback.from_user.id
     format_size = callback.data.replace("format_", "")
@@ -132,6 +132,7 @@ async def handle_format(callback: types.CallbackQuery):
 
     # Запускаем обработку
     result_url = await stylize_image(image_path, style, format_size)
+    print("🔧 Функция stylize_image вызвана.")
 
     if result_url:
         await callback.message.answer_photo(photo=result_url, caption="✅ Готово! Вот ваше изображение.")
@@ -150,16 +151,7 @@ async def handle_format(callback: types.CallbackQuery):
     await callback.answer()
 
 
-
-
-   
-
-
-
-
-
-
-# Запук
+# Запуск
 async def main():
     await dp.start_polling(bot)
 
