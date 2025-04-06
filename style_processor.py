@@ -27,7 +27,7 @@ async def stylize_image(image_path: str, style: str, size: str) -> str:
         response = await openai.Image.acreate_edit(
             image=open(image_path, "rb"),
             mask=None,
-            promt=promt,
+            prompt=prompt,
             n=1,
             size=size # формат выбираем динамически (1:1, 16:9, и т.д.)
         )
