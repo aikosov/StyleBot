@@ -1,11 +1,14 @@
-import openai
+#import openai
 import os
 from dotenv import load_dotenv
-from config import OPENAI_API_KEY
+from openai import OpenAI
+#from config import OPENAI_API_KEY
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
+#openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
 #openai.api_key = OPENAI_API_KEY
 
 
@@ -24,13 +27,16 @@ async def stylize_image(image_path: str, style: str, size: str) -> str:
     prompt = STYLE_PROMPTS.get(style, "Transform the photo into an artistic version.")
 
     try:
-        response = await openai.images.generate(
-            model="dall-e-3",
-            prompt=prompt,
-            size=size,
-            quality="standart",
-            n=1
-        )
+        with open(image_path, "rb") as image_file:
+            #response = await openai.images.generate(
+            response = client.images.edit(
+                #model="dall-e-3",
+                image=image_file,
+                prompt=prompt,
+                #quality="standart",
+                n=1,
+                size=size
+            )
             
         return response.data[0].url
     except Exception as e:

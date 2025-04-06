@@ -1,4 +1,4 @@
-#!/Users/aikosov/Downloads/СтильБот/venv/bin/python3
+#!/Users/aikosov/Downloads/СтильБот/venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
