@@ -85,6 +85,7 @@ async def handle_photo(message: Message):
     # Сохраняем фото во временный файл
     photo = message.photo[-1]
     file = await bot.get_file(photo.file_id)
+    os.makedirs("temp", exist_ok=True)
     file_path = f"temp/{message.from_user.id}_{int(time.time())}.jpg"
     await bot.download_file(file.file_path, destination=file_path)
 
@@ -129,7 +130,9 @@ async def handle_format(callback: types.CallbackQuery):
     style = session["style"]
 
     await callback.message.answer("🎨 Обрабатываю изображение... Это может занять до 5 минут.")
-
+    print("Пользователь выбрал формат:", format_size)
+    print("style:", style)
+    print("image_path:", image_path)
     # Запускаем обработку
     result_url = await stylize_image(image_path, style, format_size)
     print("🔧 Функция stylize_image вызвана.")
