@@ -32,7 +32,7 @@ async def stylize_image(image_path: str, style: str, size: str) -> str:
             n=1
         )
             
-        return response data.[0].url
+        return response data[0].url
     except Exception as e:
         print("OpenAI error:", e)
         return None
