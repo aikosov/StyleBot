@@ -11,7 +11,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Инструкции по стилям
 STYLE_PROMPTS = {
-    "disney": "Create a Disnay-style portrait of the uploaded photo.",
+    "disney": "Create a Disney-style portrait of the uploaded photo.",
     "ghibli": "Turn this photo into a Ghibli-style drawing.",
     "simpsons": "Make a Simpsons-style cartoon of the person in this image.",
     "southpark": "Transform the photo into South Park style.",
@@ -24,7 +24,7 @@ async def stylize_image(image_path: str, style: str, size: str) -> str:
     prompt = STYLE_PROMPTS.get(style, "Transform the photo into an artistic version.")
 
     try:
-        response = await openai.image.generate(
+        response = await openai.images.generate(
             model="dall-e-3",
             prompt=prompt,
             size=size,
@@ -32,7 +32,7 @@ async def stylize_image(image_path: str, style: str, size: str) -> str:
             n=1
         )
             
-        return response["data"][0]["url"]
+        return response.data[0].url
     except Exception as e:
         print("OpenAI error:", e)
         return None

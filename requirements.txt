@@ -1,4 +1,4 @@
 aiogram
-openai==0.28
+openai>=1.13.3
 python-dotenv
 aiofiles
