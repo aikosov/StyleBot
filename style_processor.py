@@ -1,7 +1,7 @@
 #import openai
+from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
 #from config import OPENAI_API_KEY
 
 load_dotenv()
@@ -23,7 +23,7 @@ STYLE_PROMPTS = {
 }
 
 # Основная функция генерации изображения
-async def stylize_image(image_path: str, style: str, size: str) -> str:
+def stylize_image(image_path: str, style: str, size: str) -> str:
     prompt = STYLE_PROMPTS.get(style, "Transform the photo into an artistic version.")
 
     try:

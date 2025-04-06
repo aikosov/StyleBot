@@ -134,7 +134,7 @@ async def handle_format(callback: types.CallbackQuery):
     print("style:", style)
     print("image_path:", image_path)
     # Запускаем обработку
-    result_url = await stylize_image(image_path, style, format_size)
+    result_url = stylize_image(image_path, style, format_size)
     print("🔧 Функция stylize_image вызвана.")
 
     if result_url:
