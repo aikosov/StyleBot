@@ -7,7 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 #openai.api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY"),
+    project=os.getenv("OPENAI_PROJECT_ID"),
+    organization-os.getenv("OPENAI_ORG_ID")
 )
 #openai.api_key = OPENAI_API_KEY
 
