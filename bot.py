@@ -33,6 +33,11 @@ main_kb = ReplyKeyboardMarkup(
     input_field_placeholder="Выберите действие"
 )
 
+# Кнопка Обработать изображение
+@dp.message(F.text == "🎨 Обработать изображение")
+async def handle_start_image_processing(message: Message):
+    await message.answer("🖼 Пожалуйста, отправьте фотографию, которую хотите обработать.")
+
  
 # Кнопки выбора стиля
 style_kb = InlineKeyboardMarkup(
@@ -80,11 +85,12 @@ async def handle_photo(message: Message):
     # Сохраняем фото во временный файл
     photo = message.photo[-1]
     file = await bot.get_file(photo.file_id)
-    file_path = f"temp/{user_id}_{int(time.time())}.jpg"
+    file_path = f"temp/{message.from_user.id}_{int(time.time())}.jpg"
     await bot.download_file(file.file_path, destination=file_path)
 
     # Запоминаем путь к изображению
     user_sessions[user_id] = {"image_path": file_path}
+        
 
     await message.answer("📷 Фото получено! Теперь выберите стиль обработки:", reply_markup=style_kb)
 
